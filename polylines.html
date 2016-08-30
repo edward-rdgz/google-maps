@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <style>
+    html, body, #map {
+		height: 100%;
+		margin: 0px;
+		padding: 0px
+    }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRxC6Y4f-j6nECyHWigtBATtJyXyha-XU&libraries=adsense"></script>
+
+    <script>
+    
+    var mapElement, neighborhood, mapTypeControlStyle, mapTypeId, mapOptions, 
+		map, markerOptions, marker, mapCoordinates, polylineOptions, polyline, 
+		polygonOptions, polygon, path; // DECLARACION DE VARIABLES
+    
+    function map() {
+    
+		mapElement = document.getElementById('map'); // ELEMENTO HTML
+		
+		neighborhood = new google.maps.LatLng(20.6335355,-87.0796316); // COORDENADAS DEL LUGAR
+		
+		mapTypeControlStyle = { 
+			style: google.maps.MapTypeControlStyle.DROPDOWN_MENU // ESTILO DROPDOWN_MENU
+		}; // ESTILO DEL MENU DE CONTROL DEL TIPO DE MAPA
+		
+		mapTypeId = google.maps.MapTypeId.ROADMAP; // ESTILO GEOGRAFICO DEL MAPA
+		
+		mapOptions = {
+			center: neighborhood, // LUGAR
+			disableDoubleClickZoom: true, // ZOOM CON DOBLE CLIC
+			draggable: true,  // DESPLAZAMIENTO SOBRE EL MAPA CON EL MOUSE
+			mapTypeControl: true, // ACTIVACION DEL MENU DE CONTROL DE TIPO DE MAPA
+			mapTypeControlOptions: mapTypeControlStyle, // ESTILO DEL MENU DE CONTROL
+			mapTypeId: mapTypeId , // ESTILO GEOGRAFICO DEL MAPA
+			scrollwheel: true,  // scroll mouse
+			streetViewControl: false, // VISOR DE CALLES 3D
+			panControl: true, // PANEL DE CONTROL DE DESPLAZAMIENTO
+			zoom: 13, // ZOOM
+			zoomControl: false // CONTROL DE ZOOM
+		}; // ESPECIFICACION DE LAS HERRAMIENTAS DE GOOGLE MAPS
+		
+		map = new google.maps.Map(mapElement, mapOptions); // CREACION DEL MAPA Y SUS PROPIEDADES
+		
+		markerOptions = {
+			position: neighborhood,
+			title: "Playa del Carmen",
+			map: map
+		}; // PROPIEDADES DEL MARCADOR
+		
+		marker = new google.maps.Marker(markerOptions); // CREACION DEL MARCADOR
+		
+		mapCoordinates = [
+			new google.maps.LatLng(20.599525926808795,-87.09342956542969),
+			new google.maps.LatLng(20.611335873205604,-87.10209846496582),
+			new google.maps.LatLng(20.611657219498884,-87.10248470306396),
+			new google.maps.LatLng(20.60980946905586,-87.10458755493164),
+			new google.maps.LatLng(20.616236330521108,-87.11136817932129),
+			new google.maps.LatLng(20.63503334333391,-87.10844993591309),
+			new google.maps.LatLng(20.63519399155791,-87.10553169250488),
+			new google.maps.LatLng(20.63680046446867,-87.09952354431152),
+			new google.maps.LatLng(20.645957036113767,-87.09360122680664),
+			new google.maps.LatLng(20.64483257455159,-87.09136962890625),
+			new google.maps.LatLng(20.649009104152594,-87.08853721618652),
+			new google.maps.LatLng(20.652382371230658,-87.08879470825195),
+			new google.maps.LatLng(20.652944575133088,-87.08733558654785),
+			new google.maps.LatLng(20.652221741162332,-87.08553314208984),
+			new google.maps.LatLng(20.653908348413896,-87.08415985107422),
+			new google.maps.LatLng(20.654550860539477,-87.0851469039917),
+			new google.maps.LatLng(20.655434310277368,-87.084481716156),
+			new google.maps.LatLng(20.656177207218594,-87.08518981933594),
+			new google.maps.LatLng(20.656799631589767,-87.08441734313965),
+			new google.maps.LatLng(20.65764291215522,-87.08360195159912),
+			new google.maps.LatLng(20.65637798955234,-87.0820140838623),
+			new google.maps.LatLng(20.663344972219274,-87.07295894622803),
+			new google.maps.LatLng(20.66531253483271,-87.06948280334473),
+			new google.maps.LatLng(20.66338512681304,-87.06836700439453),
+			new google.maps.LatLng(20.661618314647082,-87.07042694091797),
+			new google.maps.LatLng(20.65768306825591,-87.06510543823242),
+			new google.maps.LatLng(20.66627622967212,-87.0567798614502),
+			new google.maps.LatLng(20.66515191843175,-87.05437660217285),
+			new google.maps.LatLng(20.663545745082015,-87.05506324768066),
+			new google.maps.LatLng(20.65936961490283,-87.04776763916016),
+			new google.maps.LatLng(20.65133827275255,-87.05360412597656),
+			new google.maps.LatLng(20.650454799208394,-87.05265998840332),
+			new google.maps.LatLng(20.637282403034103,-87.06278800964355),
+			new google.maps.LatLng(20.63535463961231,-87.05918312072754),
+			new google.maps.LatLng(20.633346526741114,-87.06218719482422),
+			new google.maps.LatLng(20.630374471056857,-87.06493377685547),
+			new google.maps.LatLng(20.62756301361043,-87.06682205200195),
+			new google.maps.LatLng(20.62740235733063,-87.06836700439453),
+			new google.maps.LatLng(20.62571545615513,-87.07077026367188),
+			new google.maps.LatLng(20.62402853628587,-87.07283020019531),
+			new google.maps.LatLng(20.62210060497515,-87.07403182983398),
+			new google.maps.LatLng(20.62105629865517,-87.0747184753418),
+			new google.maps.LatLng(20.62031323018153,-87.07403182983398),
+			new google.maps.LatLng(20.620112400241865,-87.07424640655518),
+			new google.maps.LatLng(20.62067472340543,-87.07519054412842),
+			new google.maps.LatLng(20.61936932716202,-87.07643508911133),
+			new google.maps.LatLng(20.61422796544174,-87.07918167114258),
+			new google.maps.LatLng(20.61029149307112,-87.08373069763184),
+			new google.maps.LatLng(20.60426608327434,-87.08836555480957),
+			new google.maps.LatLng(20.599505841086405,-87.09340810775757)
+		]; // COORDENADAS PARA LA CREACION DE UNA POLILINEA O POLIGONO, INFLUYE MUCHO LA CANTIDAD DE LAS MISMAS
+		
+		polylineOptions = {
+			path: mapCoordinates,
+			geodesic: true,
+			strokeColor: '#FF0000',
+			strokeOpacity: 0.8,
+			strokeWeight: 1.5,
+		}; // PROPIEDADES DE LA POLILINEA
+		
+		//polyline = new google.maps.Polyline(polylineOptions); // CREACION DE LA POLILINEA
+		
+		//polyline.setMap(map); // SUPERPOSICION DE LA POLILINEA SOBRE EL MAPA
+		
+		polygonOptions = {
+			paths: mapCoordinates,
+			strokeColor: 'blue', //#FF0000
+			strokeOpacity: 0.8,
+			strokeWeight: 1.5,
+			fillColor: 'blue',
+			fillOpacity: 0.10
+		}; // PROPIEDADES DEL POLIGONO
+		
+		polygon = new google.maps.Polygon(polygonOptions); // CREACION DEL POLIGONO
+		
+		polygon.setMap(map); // SUPERPOSICION DEL POLIGONO SOBRE EL MAPA
+		
+		//google.maps.event.addListener(map, 'click', addLatLng); // SE AGREGA EL EVENTO CLIC AL LISTADO
+		/* NOTA: ES NECESARIO COMENTAR path Y geodesic  PARA ACTIVAR LA POLILINEA PUNTO A PUNTO, ANTES DE
+		DESCOMENTAR ESTA LINEA DE CODIGO */
+		   
+    }
+    
+    function addLatLng(event) { //  AGREGA UN NUEVO PUNTO DE POLILINEA, DESPUES DE CADA EVENTO ONCLICK SOBRE LA SUPERFICIE DEL MAPA
+	
+		path = polyline.getPath(); // ES UN MVCArray PARA OBTENER LA RUTA O POSICION DEL PUNTO
+		
+		path.push(event.latLng); // SE AÑADEN NUEVAS COORDENADAS QUE APARECERAN AUTOMATICAMENTE, DESPUES DE CADA CLIC
+		
+		markerOptions = {
+			position: event.latLng, // POSICION DEL MARCADOR CONFORME AL EVENTO CLIC
+			title: '#' + path.getLength(), // NOMBRE DADO AL MARCADOR SOBRE UN PUNTO CARTESIANO
+			map: map // ELEMENTO MAPA
+		} // PROPIEDADES DEL MARCADOR
+		
+		marker = new google.maps.Marker(markerOptions); // sE AGREGA UN NUEVO MARCADOR AL NUEVO PUNTO DE LA POLILINEA
+		
+		//console.log(event.latLng); SIRVE PARA IMPRIMIR LAS COORDENADAS DE CADA MARCADOR
+		
+    }
+    
+    google.maps.event.addDomListener(window, 'load', map); // SE AGREGA UN EVENTO ONLOAD AL LISTADO DEL DOCUMENTO
+    
+    </script>
+</head>
+
+<body>
+	<div id="map"></div>
+</body>
+</html>
